@@ -1,0 +1,62 @@
+.questions {
+    width: 60%;
+    height: 100%;
+}
+
+.questions .logoHeader {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+
+}
+
+.questions .logoHeader img {
+    width: 52px;
+    margin-right: 20px;
+}
+
+.question .questionBtn.btn {
+    width: 100%;
+
+    color: #333333;
+    font-size: 16px;
+    font-weight: 700;
+
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 20px 0;
+}
+
+.question .questionBtn.btn:last-child {
+    margin-bottom: 90px;
+}
+
+.question .questionBtn ion-icon {
+    font-size: 23px;
+    font-weight: 700;
+    --ionicon-stroke-width: 50px;
+}
+
+.questions footer {
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+
+    font-family: 'Recursive', sans-serif;
+
+    margin-top: 90px;
+
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.274);
+
+}
