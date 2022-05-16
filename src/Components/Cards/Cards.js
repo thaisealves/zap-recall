@@ -21,6 +21,7 @@ export default function Cards() {
     const [answerIcons, setAnswerIcons] = useState([]);
     const [finalText, setFinalText] = useState("")
     const [restart, setRestart] = useState("")
+    const [wrongOne, setWrongOne] = useState(false)
     return (
         <div className="questions">
             <div className="logoHeader">
@@ -28,7 +29,7 @@ export default function Cards() {
                 <h1>ZapRecall</h1>
             </div>
             <div className="question">
-                {cards.map((elem, ind) => <OpenedCard question={elem.question} answer={elem.answer} ind={ind} key={ind} answerIcons={answerIcons} setAnswerIcons={setAnswerIcons} complete={complete} setComplete={setComplete} setFinalText={setFinalText} questionNum={QUESTIONS_NUM} setRestart={setRestart} />)}
+                {cards.map((elem, ind) => <OpenedCard question={elem.question} answer={elem.answer} ind={ind} key={ind} answerIcons={answerIcons} setAnswerIcons={setAnswerIcons} complete={complete} setComplete={setComplete} setFinalText={setFinalText} questionNum={QUESTIONS_NUM} setRestart={setRestart} setWrongOne={setWrongOne} wrongOne={wrongOne}/>)}
             </div>
             <footer>
                 {finalText}
