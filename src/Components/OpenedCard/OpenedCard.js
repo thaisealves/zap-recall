@@ -2,8 +2,9 @@
 import turn from "../../assets/img/Vector.svg"
 import { useState } from "react"
 import "./OpenedCard.css"
+import { Link } from "react-router-dom"
 let wrongOne = [];
-export default function OpenedCard({ question, answer, ind, setComplete, complete, answerIcons, setAnswerIcons, setFinalText, questionNum }) {
+export default function OpenedCard({ question, answer, ind, setComplete, complete, answerIcons, setAnswerIcons, setFinalText, questionNum, setRestart }) {
     const [isCardClosed, setIsCardClosed] = useState(true)
     const [questionContent, setQuestionContent] = useState(true)
     const [icon, setIcon] = useState(<ion-icon name="play-outline" onClick={cardHandle}></ion-icon>)
@@ -67,6 +68,7 @@ export default function OpenedCard({ question, answer, ind, setComplete, complet
         }
 
         if (complete === questionNum - 1) {
+            setRestart(<Link to="/" className="restart">REINICIAR RECALL</Link>)
             wrongOne.includes(true) ?
                 setFinalText(<div className="text">
                     <div>
