@@ -1,7 +1,7 @@
 div.init {
     display: flex;
     flex-direction: column;
-    height: 70%;
+    min-height: 400px;
     justify-content: space-between;
     align-items: center;
 }
