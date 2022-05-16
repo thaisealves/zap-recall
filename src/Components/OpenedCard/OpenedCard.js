@@ -2,18 +2,17 @@
 import turn from "../../assets/img/Vector.svg"
 import {useState} from "react"
 import "./OpenedCard.css"
-export default function OpenedCard({ question, answer, ind }) {
+export default function OpenedCard({ question, answer, ind, setComplete, complete }) {
     const [isCardClosed, setIsCardClosed] = useState(true)
     const [questionContent, setQuestionContent] = useState(true)
-    const [icon, setIcon] = useState("play-outline")
-    const [classIcon, setClassIcon] = useState("md hydrated")
+    const [icon, setIcon] = useState(<ion-icon name="play-outline"  onClick={cardHandle}></ion-icon>)
     const [classQuestion, setClassQuestion] = useState("questionBtn btn")
     let content;
     if (isCardClosed) {
         content = 
         <div key={ind} className={classQuestion}>
             Pergunta {ind+1}
-            <ion-icon name={icon} className={classIcon} onClick={cardHandle}></ion-icon>
+            {icon}
         </div>
     }
     else{
@@ -47,19 +46,17 @@ export default function OpenedCard({ question, answer, ind }) {
     }
     function answered(answer){
         setIsCardClosed(true);
+        setComplete(complete+1)
         if (answer === "correct"){
-            setIcon("checkmark-circle")
-            setClassIcon("correct md hydrated")
+            setIcon(<ion-icon name="checkmark-circle"></ion-icon>)
             setClassQuestion("correct questionBtn btn")
         }
         if (answer === "almost"){
-            setIcon("help-circle")
-            setClassIcon("almost md hydrated")
+            setIcon(<ion-icon name="help-circle"></ion-icon>)
             setClassQuestion("almost questionBtn btn")
         }
         if (answer === "incorrect"){
-            setIcon("close-circle")
-            setClassIcon("incorrect md hydrated")
+            setIcon(<ion-icon name="close-circle"></ion-icon>)
             setClassQuestion("incorrect questionBtn btn")
         }
     }
