@@ -18,8 +18,9 @@ cards.sort(() => Math.random() - 0.5); /* getting the cards sorted */
 
 export default function Cards() {
     const QUESTIONS_NUM = 8; /* number of card on a deck */
-    const [complete, setComplete] = useState(0) /* seeing how many cards where answered */
-    const [answerIcons, setAnswerIcons] = useState([])
+    const [complete, setComplete] = useState(0); /* seeing how many cards where answered */
+    const [answerIcons, setAnswerIcons] = useState([]);
+    const [finalText, setFinalText] = useState ("")
     return (
         <div className="questions">
             <div className="logoHeader">
@@ -27,9 +28,10 @@ export default function Cards() {
                 <h1>ZapRecall</h1>
             </div>
             <div className="question">
-                {cards.map((elem, ind) => <OpenedCard question={elem.question} answer={elem.answer} ind={ind} key={ind} answerIcons={answerIcons} setAnswerIcons={setAnswerIcons} complete={complete} setComplete={setComplete} />)}
+                {cards.map((elem, ind) => <OpenedCard question={elem.question} answer={elem.answer} ind={ind} key={ind} answerIcons={answerIcons} setAnswerIcons={setAnswerIcons} complete={complete} setComplete={setComplete} setFinalText={setFinalText} questionNum={QUESTIONS_NUM}/>)}
             </div>
             <footer>
+                {finalText}
                 <div>
                     {complete}/{QUESTIONS_NUM} CONCLUÍDOS!
                 </div>

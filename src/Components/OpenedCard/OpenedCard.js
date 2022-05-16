@@ -2,7 +2,8 @@
 import turn from "../../assets/img/Vector.svg"
 import { useState } from "react"
 import "./OpenedCard.css"
-export default function OpenedCard({ question, answer, ind, setComplete, complete, answerIcons, setAnswerIcons }) {
+let wrongOne = [];
+export default function OpenedCard({ question, answer, ind, setComplete, complete, answerIcons, setAnswerIcons, setFinalText, questionNum }) {
     const [isCardClosed, setIsCardClosed] = useState(true)
     const [questionContent, setQuestionContent] = useState(true)
     const [icon, setIcon] = useState(<ion-icon name="play-outline" onClick={cardHandle}></ion-icon>)
@@ -27,9 +28,9 @@ export default function OpenedCard({ question, answer, ind, setComplete, complet
             <div className="card-answer opened-card btn">
                 {answer}
                 <div className="buttons">
-                    <button onClick={() => answered("incorrect")} className="incorrect">Não lembrei</button>
-                    <button onClick={() => answered("almost")} className="almost">Quase não lembrei</button>
-                    <button onClick={() => answered("correct")} className="correct">Zap!</button>
+                    <button onClick={() => answered("incorrect", ind)} className="incorrect">Não lembrei</button>
+                    <button onClick={() => answered("almost", ind)} className="almost">Quase não lembrei</button>
+                    <button onClick={() => answered("correct", ind)} className="correct">Zap!</button>
                 </div>
             </div>
     }
@@ -45,24 +46,50 @@ export default function OpenedCard({ question, answer, ind, setComplete, complet
     function cardHandle() {
         setIsCardClosed(false);
     }
-    function answered(answer) {
+    function answered(answer, ind) {
         setIsCardClosed(true);
-        setComplete(complete + 1)
+        setComplete(complete + 1);
         if (answer === "correct") {
             setIcon(<ion-icon name="checkmark-circle"></ion-icon>)
             setClassQuestion("correct questionBtn btn")
-            setAnswerIcons([...answerIcons, <ion-icon name="checkmark-circle"></ion-icon>])
+            setAnswerIcons([...answerIcons, <ion-icon key={ind} class="correct md hydrated" name="checkmark-circle"></ion-icon>])
         }
         if (answer === "almost") {
             setIcon(<ion-icon name="help-circle"></ion-icon>)
             setClassQuestion("almost questionBtn btn")
-            setAnswerIcons([...answerIcons, <ion-icon name="help-circle"></ion-icon>])
+            setAnswerIcons([...answerIcons, <ion-icon key={ind} class="almost md hydrated" name="help-circle"></ion-icon>])
         }
         if (answer === "incorrect") {
+            wrongOne.push(true)
             setIcon(<ion-icon name="close-circle"></ion-icon>)
             setClassQuestion("incorrect questionBtn btn")
-            setAnswerIcons([...answerIcons, <ion-icon name="close-circle"></ion-icon>])
+            setAnswerIcons([...answerIcons, <ion-icon key={ind} class="incorrect md hydrated" name="close-circle"></ion-icon>])
         }
-    
+
+        if (complete === questionNum - 1) {
+            wrongOne.includes(true) ?
+                setFinalText(<div className="text">
+                    <div>
+                        <strong>😥  Putz...</strong>
+                    </div>
+                    <div>
+                        Ainda faltam alguns...
+                    </div>
+                    <div>
+                        Mas não desanime!
+                    </div>
+                </div>) :
+                setFinalText(<div className="text">
+                    <div>
+                        <strong>🥳  Parabéns!</strong>
+                    </div>
+                    <div>
+                        Você não esqueceu de
+                    </div>
+                    <div>
+                        nenhum flashcard!
+                    </div>
+                </div>)
+        }
     }
 }
