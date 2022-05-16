@@ -3,18 +3,21 @@ import turn from "../../assets/img/Vector.svg"
 import {useState} from "react"
 import "./OpenedCard.css"
 export default function OpenedCard({ question, answer, ind }) {
-    const [isCardOpen, setIsCardOpen] = useState(true)
-    const [cardContent, setCardContent] = useState("question")
+    const [isCardClosed, setIsCardClosed] = useState(true)
+    const [questionContent, setQuestionContent] = useState(true)
+    const [icon, setIcon] = useState("play-outline")
+    const [classIcon, setClassIcon] = useState("md hydrated")
+    const [classQuestion, setClassQuestion] = useState("questionBtn btn")
     let content;
-    if (isCardOpen) {
+    if (isCardClosed) {
         content = 
-        <div key={ind} className="questionBtn btn">
+        <div key={ind} className={classQuestion}>
             Pergunta {ind+1}
-            <ion-icon name="play-outline" onClick={CardHandle}></ion-icon>
+            <ion-icon name={icon} className={classIcon} onClick={cardHandle}></ion-icon>
         </div>
     }
     else{
-    cardContent === "question" ?
+    questionContent ?
         content =
         <div className="card-question opened-card btn">
             {question}
@@ -24,9 +27,9 @@ export default function OpenedCard({ question, answer, ind }) {
         <div className="card-answer opened-card btn">
             {answer}
             <div className="buttons">
-                <button className="incorrect">Não lembrei</button>
-                <button className="almost">Quase não lembrei</button>
-                <button className="correct">Zap!</button>
+                <button onClick={()=>answered("incorrect")} className="incorrect">Não lembrei</button>
+                <button onClick={()=>answered("almost")} className="almost">Quase não lembrei</button>
+                <button onClick={()=>answered("correct")} className="correct">Zap!</button>
             </div>
         </div>
     }
@@ -37,9 +40,27 @@ export default function OpenedCard({ question, answer, ind }) {
 
     )
     function turningHandle() {
-        setCardContent("answer")
+        setQuestionContent(false)
     }
-    function CardHandle() {
-        setIsCardOpen(false);
+    function cardHandle() {
+        setIsCardClosed(false);
+    }
+    function answered(answer){
+        setIsCardClosed(true);
+        if (answer === "correct"){
+            setIcon("checkmark-circle")
+            setClassIcon("correct md hydrated")
+            setClassQuestion("correct questionBtn btn")
+        }
+        if (answer === "almost"){
+            setIcon("help-circle")
+            setClassIcon("almost md hydrated")
+            setClassQuestion("almost questionBtn btn")
+        }
+        if (answer === "incorrect"){
+            setIcon("close-circle")
+            setClassIcon("incorrect md hydrated")
+            setClassQuestion("incorrect questionBtn btn")
+        }
     }
 }

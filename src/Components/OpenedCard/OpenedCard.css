@@ -36,3 +36,16 @@
 .card-answer button.correct {
     background-color: #2FBE34;
 }
+
+.question .questionBtn.correct{
+    color:#2FBE34;
+    text-decoration: line-through;
+}
+.question .questionBtn.almost{
+    color:#FF922E;
+    text-decoration: line-through;
+}
+.question .questionBtn.incorrect{
+    color:#FF3030;
+    text-decoration: line-through;
+}
